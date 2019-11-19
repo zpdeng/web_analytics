@@ -1,17 +1,39 @@
 {% extends "dashboard/base.html" %}   <!-- template inheritance from base.html -->
+{% load static %}
+{% load staticfiles %}
 
 
-{% block content_block %}	<!--- override content block in base.html with following -->
-	<h1><u>About page</u> </h1>
-	<p>
-		<div class="mr-5">
-			<div class = "text-monospace"> This is a web analytics dashboard for CSAI and
-			Allen Deng's Research Project </div>
-		</div>
+<!DOCTYPE html>
+<html>
 
-	</p>
-{% endblock content_block %}
+<head>
+</head>
+
+<body>
+
+	{% block Area_Chart %} {% endblock Area_Chart %}
+	{% block DataTable %} {% endblock DataTable %}
+
+	{% block content_block %}	<!--- override content block in base.html with following -->
+		<h1><u>About page</u> </h1>
+		<p>
+			<div class="mr-5">
+				<div class = "text-monospace"> This is a web analytics dashboard for CSAI and
+				Allen Deng's Research Project </div>
+			</div>
+		</p>
+
+		<!-- this script works !-->
+
+		<script>
+        alert( 'Hello, world!' );
+      	</script>
+
+		<!-- this doesn't -->
+		<script type="text/javascript" src="{% static 'dashboard/js/test.js' %}"></script>
+
+	{% endblock content_block %}
 
 
-{% block Area_Chart %} {% endblock Area_Chart %}
-{% block DataTable %} {% endblock DataTable %}
+</body>
+</html>

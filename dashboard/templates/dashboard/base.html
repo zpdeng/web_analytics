@@ -14,13 +14,13 @@
     <!-- Custom CSS -->
 
     <!-- Fonts -->
-    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/all_fonts.css' %}"> <!--generate url of file -->
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/all_fonts.css' %}"> <!--generate url of file -->
 
     <!-- Page level plugin CSS-->
-    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/dataTables_bootstrap4.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/dataTables_bootstrap4.css' %}">
 
     <!-- Custom template styles -->
-    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/custom_templates.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/custom_templates.css' %}">
 
 
     {% if title %}
@@ -28,6 +28,7 @@
     {% else %}
     <title> Main Dashboard </title>
     {% endif %}
+
 
 
 </head>
@@ -167,7 +168,7 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <i class="fas fa-chart-area"></i>
-                            Area Chart Example
+                            Area Chart
                         </div>
                         <div class="card-body">
                             <canvas id="myAreaChart" width="100%" height="30"></canvas>
@@ -181,7 +182,7 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <i class="fas fa-table"></i>
-                            Data Table Example
+                            Data Table
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -255,23 +256,63 @@
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright © Your Website 2019</span>
+                        <span>CSAI 2019</span>
                     </div>
                 </div>
             </footer>
 
-            {% block content_block %} {% endblock %}
+            {% block content_block %}
+
+            {% endblock %}
 
         </div>
         <!-- /.content-wrapper -->
     </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
     <!-- /#wrapper -->
+
+    <!-- JavaScript Files -->
+
+
+    <!------- JavaScripts -------->
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
+    <script src="{% static 'dashboard/js/bootstrap.bundle.js' %} "></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'dashboard/js/jquery.easing.js' %}"></script>
+
+    <!-- Page level plugin JavaScript -->
+
+    <script src="{% static 'dashboard/js/chart.js' %}"></script>
+
+    <!--
+    <script src="{% static 'dashboard/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'dashboard/js/datatables.bootstrap4.js' %}"></script>
+    -->
+
+    <!-- Custom scripts for all pages -->
+    <script src="{% static 'dashboard/js/admin.js' %}"></script>
+
+    <!-- Demo Scripts -->
+    <script src="{% static 'dashboard/js/chart-area.js' %}"></script>
+
+    {% block Javascripts %} {% endblock %}
 
 
 
 
     <!-- Optional JavaScript -->
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <!--
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -281,6 +322,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+            -->
+
 
 
 </body>

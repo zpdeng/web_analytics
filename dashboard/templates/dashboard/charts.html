@@ -3,13 +3,15 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Charts</title>
 
-    <link href="{% static 'dashboard/admin.css' %}", rel="stylesheet">
+    <link href="{% static 'dashboard/css/admin.css' %}", rel="stylesheet">
 
 </head>
+
 <body>
 
     <!-- Custom Charts -->
@@ -17,7 +19,7 @@
     <div class="card mb-3">
         <div class="card-header">
             <i class="fas fa-chart-area"></i>
-            Area Chart Example</div>
+            Area Chart</div>
         <div class="card-body">
             <canvas id="myAreaChart" width="100%" height="30"></canvas>
         </div>
@@ -29,7 +31,7 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-chart-bar"></i>
-                    Bar Chart Example</div>
+                    Bar Chart</div>
                 <div class="card-body">
                     <canvas id="myBarChart" width="100%" height="50"></canvas>
                 </div>
@@ -40,7 +42,7 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-chart-pie"></i>
-                    Pie Chart Example</div>
+                    Pie Chart</div>
                 <div class="card-body">
                     <canvas id="myPieChart" width="100%" height="100"></canvas>
                 </div>
@@ -48,23 +50,24 @@
             </div>
         </div>
     </div>
-
-   
-
-    </div>
     {% endblock %}
 
-    <!-- Custom Charts -->
+    {% block DataTable %} {% endblock %}
 
-    <!-- JavaScripts -->
+    <!-- Javascripts -->
 
-    <script src="./chart-area.js"> </script>
+    {% block Javascripts %}
+    <script src="{% static 'dashboard/js/chart-bar.js' %}"></script>
+    {% endblock %}
+
+
+    <!-- hello world -->
 
 </body>
 </html>
 
 
-{% block DataTable %} {% endblock %}
+
 
 
 
