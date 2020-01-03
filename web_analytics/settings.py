@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard.apps.DashboardConfig',
+    #'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -76,10 +77,27 @@ WSGI_APPLICATION = 'web_analytics.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+""" 
+### PREVIOUS DATABASE CONFIGS ###
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "dev",
+        'USER': 'nimbus',
+        'PASSWORD': 'HeyN1mbus!',
+        'HOST': '34.82.204.253',
+        'PORT': '3306',
+        'OPTIONS': {
+        }
+
     }
 }
 

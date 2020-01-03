@@ -1,13 +1,12 @@
 from django.shortcuts import render
+from dashboard.models import *;
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 
-'''
-def home(request):
-	return HttpResponse('<h1>Dashboard homepage</h1>')
-'''
-
-#Dummy data 
+#Dummy data
+''' 
 traffic_data = [
 	{
 	 	'user' : 'Jack Barker',
@@ -35,9 +34,31 @@ traffic_data = [
 	}
 
 ]
+'''
+
+#querySet
+
+
+#1
+courses_data = Courses.objects.all();
+for course in courses_data:
+	#print(course.dept + ' ' + str(course.coursenum))
+	print(course)
+
+''' 
+#2
+courses_data = Courses.objects.values('dept', 'coursenum')
+
+for course in courses_data:
+	print(course)
+'''
+
+print(type(courses_data))
+print(len(courses_data))
+
 
 def home(request):
-	context = { 'traffic_data' : traffic_data
+	context = { 'courses_data' : courses_data
 	}
 
 	return render(request, 'dashboard/home.html', context)

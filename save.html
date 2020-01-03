@@ -1,0 +1,62 @@
+<!--
+{% block DataTable %}
+
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      //can't remove atm
+      google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+
+
+      console.log("hello world")
+      /*
+      for course in courses_data:
+        console.log(course.dpt)*/
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Course Name');
+        data.addColumn('string', 'Terms Offered');
+        data.addColumn('number', 'Units');
+        data.addRows([
+          ['CPE 357. Systems Programming', 'F,W,SP', 4],
+          ['CSC 486. Human-Computer Interaction Theory and Design',   'SP' ,  4],
+          ['CSC 484. User-Centered Interface Design and Development', 'F,W,SP', 4],
+        ]);
+
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
+    </script>
+</head>
+
+<body>
+    <div id="table_div"></div>
+
+
+
+
+</body>
+
+</html>
+{% endblock DataTable %}
+-->
+
+
+
+<!--
+
+{% block DataTable %}
+   {% for course in courses_data %}
+   <h1> {{course.coursename}} </h1>
+   <h1> {{course.termsoffered}} </h1>
+   {% endfor %}
+{% endblock DataTable %}
+
+-->
