@@ -24,8 +24,6 @@ class Clubs(models.Model):
         managed = False
         db_table = 'Clubs'
 
-    def __str__(self):
-        return self.coursename
 
 class Corequisites(models.Model):
     courseid = models.OneToOneField('Courses', models.DO_NOTHING, db_column='courseId', primary_key=True)  # Field name made lowercase.
@@ -38,8 +36,11 @@ class Corequisites(models.Model):
 
 
 class Corrections(models.Model):
-    correctionid = models.IntegerField(db_column='correctionId', primary_key=True)  # Field name made lowercase.
-    text = models.CharField(max_length=45, blank=True, null=True)
+    correctionid = models.AutoField(db_column='correctionId', primary_key=True)  # Field name made lowercase.
+    rawtext = models.CharField(db_column='rawText', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    correctiontext = models.CharField(db_column='correctionText', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    tablenametocorrect = models.CharField(db_column='tableNameToCorrect', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    columnnametocorrect = models.CharField(db_column='columnNameToCorrect', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -47,23 +48,22 @@ class Corrections(models.Model):
 
 
 class Courses(models.Model):
-    courseid = models.IntegerField(db_column='courseId', primary_key=True)  # Field name made lowercase.
+    courseid = models.AutoField(db_column='courseId', primary_key=True)  # Field name made lowercase.
     dept = models.CharField(max_length=5)
     coursenum = models.IntegerField(db_column='courseNum')  # Field name made lowercase.
-    termsoffered = models.CharField(db_column='termsOffered', max_length=9)  # Field name made lowercase.
-    units = models.IntegerField()
+    termsoffered = models.CharField(db_column='termsOffered', max_length=13)  # Field name made lowercase.
+    units = models.CharField(max_length=5)
     coursename = models.CharField(db_column='courseName', max_length=255)  # Field name made lowercase.
-    concurrent = models.CharField(max_length=45)
-    recommended = models.CharField(max_length=45)
+    raw_concurrent_text = models.TextField()
+    raw_recommended_text = models.TextField()
+    raw_prerequisites_text = models.TextField(blank=True, null=True)
     crosslistedas = models.CharField(db_column='crossListedAs', max_length=45)  # Field name made lowercase.
+    raw_standing_text = models.CharField(max_length=45, blank=True, null=True)
     standing = models.CharField(max_length=2, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'Courses'
-
-    def __str__(self):
-        return self.coursename
 
 
 class Officehours(models.Model):
@@ -102,15 +102,23 @@ class Professors(models.Model):
     firstname = models.CharField(db_column='firstName', max_length=45)  # Field name made lowercase.
     lastname = models.CharField(db_column='lastName', max_length=45)  # Field name made lowercase.
     phonenumber = models.CharField(db_column='phoneNumber', max_length=15)  # Field name made lowercase.
-    researchWants = models.CharField(db_column='research wants', max_length=255)  # Field name made lowercase.
+    research_interests = models.TextField(db_column='researchInterests')  # Field name made lowercase.
     email = models.CharField(max_length=45)
 
     class Meta:
         managed = False
         db_table = 'Professors'
 
-    def __str__(self):
-        return self.firstname + ' ' + self.lastname
+
+class Questionanswerformats(models.Model):
+    idquestionformats = models.AutoField(db_column='idQuestionFormats', primary_key=True)  # Field name made lowercase.
+    questionformat = models.CharField(db_column='questionFormat', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    answerformat = models.CharField(db_column='answerFormat', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    userresponsetype = models.CharField(db_column='userResponseType', max_length=255, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'QuestionAnswerFormats'
 
 
 class Researchinterests(models.Model):
@@ -123,14 +131,19 @@ class Researchinterests(models.Model):
         unique_together = (('professors', 'interest'),)
 
 
-class Responseformats(models.Model):
-    idquestionformats = models.IntegerField(db_column='idQuestionFormats', primary_key=True)  # Field name made lowercase.
-    questionformat = models.CharField(db_column='questionFormat', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    answerformat = models.CharField(db_column='answerFormat', max_length=255, blank=True, null=True)  # Field name made lowercase.
+class Sessions(models.Model):
+    idsessions = models.AutoField(db_column='idSessions', primary_key=True)  # Field name made lowercase.
+    starttime = models.DateTimeField(db_column='startTime', blank=True, null=True)  # Field name made lowercase.
+    endtime = models.DateTimeField(db_column='endTIme', blank=True, null=True)  # Field name made lowercase.
+    userid = models.IntegerField(db_column='userId', blank=True, null=True)  # Field name made lowercase.
+    device = models.CharField(max_length=7, blank=True, null=True)
+    location = models.CharField(max_length=45, blank=True, null=True)
+    questionasked = models.CharField(db_column='questionAsked', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    answergiven = models.CharField(db_column='answerGiven', max_length=45, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'ResponseFormats'
+        db_table = 'Sessions'
 
 
 class Shortnames(models.Model):
@@ -141,4 +154,3 @@ class Shortnames(models.Model):
         managed = False
         db_table = 'ShortNames'
         unique_together = (('courseid', 'shortname'),)
-
