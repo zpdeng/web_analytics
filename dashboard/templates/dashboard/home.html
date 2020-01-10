@@ -7,51 +7,93 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
-      //can't remove atm
-      google.charts.load('current', {'packages':['table']});
-      google.charts.setOnLoadCallback(drawTable);
+        //can't remove atm
+        google.charts.load('current', {'packages':['table']});
+        google.charts.setOnLoadCallback(drawTable);
 
-      console.log("hello world")
-      /*
-      for course in courses_data:
-        console.log(course.dpt)*/
+        console.log("hello world");
 
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Course Name');
-        data.addColumn('string', 'Terms Offered');
-        data.addColumn('number', 'Units');
-        data.addRows([
-          ['CPE 357. Systems Programming', 'F,W,SP', 4],
-          ['CSC 486. Human-Computer Interaction Theory and Design',   'SP' ,  4],
-          ['CSC 484. User-Centered Interface Design and Development', 'F,W,SP', 4],
-        ]);
+        // "{{courses_data|escapejs|safe}}" turns it into string
+
+        var coursesData = JSON.parse("{{courses_data|escapejs|safe}}"); //JSON object
+        console.log(coursesData)
+
+        console.log(typeof "{{courses_data|escapejs|safe}}") //string
+        console.log(typeof coursesData)
+        console.log(coursesData)
+        console.log(coursesData[0]["fields"]["dept"] + coursesData[0]["fields"]["coursenum"])
+        console.log(coursesData.length)
+
+        for (var i = 0; i < coursesData.length; i++){
+
+            var courseObj = coursesData[i];
+
+            console.log(courseObj["fields"]["dept"] + courseObj["fields"]["coursenum"] );
+        }
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Course Name');
+            data.addColumn('string', 'Terms Offered');
+            data.addColumn('number', 'Units');
 
 
-        var table = new google.visualization.Table(document.getElementById('table_div'));
+            for (var i = 0; i < coursesData.length; i++){
 
-        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
-      }
+                var courseObj = coursesData[i];
+
+                console.log(courseObj["fields"]["coursename"]+
+                            courseObj["fields"]["termsoffered"]+
+                            courseObj["fields"]["units"]);
+
+                /*
+                data.addRow([courseObj["fields"]["coursename"],
+                            courseObj["fields"]["termsoffered"],
+                            courseObj["fields"]["units"]]);
+                */
+
+            }
+
+
+            /*
+            data.addRows([
+              ['CPE 357. Systems Programming', 'F,W,SP', 4],
+              ['CSC 486. Human-Computer Interaction Theory and Design',   'SP' ,  4],
+              ['CSC 484. User-Centered Interface Design and Development', 'F,W,SP', 4],
+            ]);*/
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+
+            table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+        }
     </script>
 </head>
 
 <body>
-<div id="table_div"></div>
+
+    {% for data in courses_data %}
+        <h1> {{data.dept}} </h1>
+        <h1> {{data.coursenum}} </h1>
+    {% endfor %}
+
+    <div id="table_div"></div>
 
 </body>
 
 </html>
 {% endblock DataTable %}
 
+
 <!--- override content block in base.html with following -->
 
 <!--
 {% block content %}
-	{% for data in traffic_data %}
-	<h1> {{data.user}} </h1>
-	<h1> {{data.location}} </h1>
-	<h1> {{data.pages_visited}} </h1>
-	{% endfor %}
+
+	{% for data in courses_data %}
+        <h1> {{data.dept}} </h1>
+        <h1> {{data.coursenum}} </h1>
+    {% endfor %}
+
 {% endblock content %} -->
 
 

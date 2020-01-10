@@ -1,6 +1,6 @@
 {% extends "dashboard/base.html" %}   <!-- template inheritance from base.html -->
 {% load static %}
-{% load staticfiles %}
+
 
 
 <!DOCTYPE html>
@@ -23,13 +23,7 @@
 			</div>
 		</p>
 
-		<!-- this script works !-->
-
-		<script>
-        alert( 'Hello, world!' );
-      	</script>
-
-		<!-- this doesn't -->
+		<!-- External JS Script -->
 		<script type="text/javascript" src="{% static 'dashboard/js/test.js' %}"></script>
 
 	{% endblock content_block %}
