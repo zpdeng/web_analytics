@@ -77,29 +77,23 @@ WSGI_APPLICATION = 'web_analytics.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-""" 
-### PREVIOUS DATABASE CONFIGS ###
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-"""
+
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "dev",
+        'NAME': "dev_dec-20-2019",
         'USER': 'nimbus',
         'PASSWORD': 'HeyN1mbus!',
-        'HOST': '34.82.204.253',
+        'HOST': '35.247.107.51',
         'PORT': '3306',
         'OPTIONS': {
         }
 
     }
 }
+
 
 
 # Password validation
